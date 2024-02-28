@@ -1,4 +1,6 @@
-import type { Options } from '@wdio/types'
+import type { Options } from '@wdio/types';
+import fs from 'fs';
+
 export const config: Options.Testrunner = {
     //
     // ====================
@@ -31,7 +33,7 @@ export const config: Options.Testrunner = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './test/specs/login.test.ts'
+        './test/specs/webview.test.ts'
         // './test/specs/**/*.ts'
     ],
     // Patterns to exclude.
@@ -54,7 +56,7 @@ export const config: Options.Testrunner = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -103,7 +105,7 @@ export const config: Options.Testrunner = {
     // baseUrl: 'http://localhost:8080',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 20000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
@@ -116,7 +118,15 @@ export const config: Options.Testrunner = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['appium'],
+    services: [
+        ['appium', {
+            command: 'appium',
+            args: {
+                port: 4723,
+                'allowInsecure': 'chromedriver_autodownload'
+            }
+        }]
+    ],
 
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -139,13 +149,18 @@ export const config: Options.Testrunner = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: [['allure', { outputDir: 'allure-results' }]],
+    reporters: ['spec', ['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
+        disableMochaHooks: true
+    }]],
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: 60000 * 3
     },
 
     //
@@ -242,9 +257,13 @@ export const config: Options.Testrunner = {
      * @param {boolean} result.passed    true if test has passed, otherwise false
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
+    // @ts-ignore: noUnusedParameters
     afterTest: async function (test, context, { error, result, duration, passed, retries }) {
+        if (!fs.existsSync("./errorShots")) {
+            fs.mkdirSync("./errorShots");
+        }
         if (!passed) {
-            await browser.takeScreenshot();
+            await driver.saveScreenshot(`./errorShots/${test.title.replaceAll(" ", "_")}.png`);
         }
     },
 

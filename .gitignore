@@ -11,6 +11,7 @@ Allure-report/
 logs/
 package-lock.json
 errorShots/
+app/
 
 # Compiled Java class files
 *.class

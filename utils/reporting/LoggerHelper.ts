@@ -31,8 +31,6 @@ export namespace LoggerHelper {
                 writeFileSync(logFilePath, '');
             }
 
-            // initialize the logger
-            // if (LOGGER == undefined || LOGGER == null) {
             LOGGER = winston.createLogger({
                 level: 'debug',
                 format: myFormat,
@@ -51,17 +49,12 @@ export namespace LoggerHelper {
             LOGGER.info('LOGGER setup complete');
             LOGGER.info('-----------------------------');
             LOGGER.info(`generating log file at ${reportFolderPath}/${loggerFileName}`);
-            // }
         } catch (error) {
             console.info('-----------------------------');
             console.info('LOGGER setup Failed');
             console.info('-----------------------------');
             throw error;
         }
-    }
-
-    function camelCase(str: string): string {
-        return str.replace(/(?:^\w|[A-Z]|\b\w)/g, (word, index) => index === 0 ? word.toLowerCase() : word.toUpperCase()).replace(/\s+/g, '');
     }
 
     function snakeCase(str: string): string {
