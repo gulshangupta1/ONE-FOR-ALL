@@ -1,12 +1,12 @@
-import { LoggerHelper } from "./../../utilities/reporting/LoggerHelper";
+import { LoggerHelper } from "../../utils/reporting/LoggerHelper";
 
-const specName = 'Tymepass Login'
-describe('Tymepass Login', () => {
+const specName: string = 'Timepass Login';
+describe(specName, () => {
     before(async () => {
         LoggerHelper.setupLogger(specName);
     });
 
     it('Trying to login', async () => {
-        console.log('Hi Gulshan');
+        console.log('Hi');
     });
 });
