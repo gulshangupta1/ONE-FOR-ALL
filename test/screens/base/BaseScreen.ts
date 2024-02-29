@@ -1,9 +1,16 @@
+import { SwipeUtils } from "../../../utils/actions/SwipeUtils";
+import { LOGGER } from "../../../utils/reporting/LoggerHelper";
+
 export class BaseScreen {
     private timeout: number = 10000;
+    private swipeUtils: SwipeUtils;
+
+    constructor() {
+        this.swipeUtils = new SwipeUtils();
+    }
 
     protected async getElement(locator: string | WebdriverIO.Element): Promise<WebdriverIO.Element> {
-        if (typeof locator === 'string')
-            return await $(locator);
+        if (typeof locator === 'string') return await $(locator);
         return locator;
     }
 
@@ -95,5 +102,28 @@ export class BaseScreen {
         element = await this.getElement(element);
         if (timeout !== undefined) await element.waitForDisplayed({ timeout: timeout });
         else await element.waitForDisplayed();
+    }
+
+    async swipeTillElement(element: string | WebdriverIO.Element, maxScrollAttempts: number = 5): Promise<boolean> {
+        let elementFound: boolean = false;
+        element = await this.getElement(element);
+
+        let isElementDisplayed: boolean = false;
+        try {
+            for (let attempt = 0; attempt < maxScrollAttempts; attempt++) {
+                isElementDisplayed = await element.isDisplayed();
+                if (isElementDisplayed) {
+                    elementFound = true;
+                    break;
+                }
+                await this.swipeUtils.swipeByPercentage();
+            }
+            if (!elementFound) LOGGER.warn(`Element not found after ${maxScrollAttempts} swipe attempts.`);
+
+            return elementFound;
+        } catch (err) {
+            LOGGER.error(`Error performing swipe: \n${err.stack}`);
+            throw err;
+        }
     }
 }
