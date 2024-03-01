@@ -1,5 +1,6 @@
 import type { Options } from '@wdio/types';
 import fs from 'fs';
+import findProcess from 'find-process';
 
 export const config: Options.Testrunner = {
     //
@@ -176,8 +177,14 @@ export const config: Options.Testrunner = {
      * @param {object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+    // @ts-ignore: noUnusedParameters
+    onPrepare: async function (config, capabilities) {
+        const processList = await findProcess('port', 4723);
+        if (processList.length > 0) {
+            processList.forEach(p => process.kill(p.pid));
+        }
+        console.log(`Terminated lingering Appium processes on port ${config.port}`);
+    },
     /**
      * Gets executed before a worker process is spawned and can be used to initialize specific service
      * for that worker as well as modify runtime environments in an async fashion.
