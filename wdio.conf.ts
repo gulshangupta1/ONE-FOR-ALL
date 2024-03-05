@@ -34,8 +34,7 @@ export const config: Options.Testrunner = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './test/specs/webview.test.ts'
-        // './test/specs/**/*.ts'
+        './test/specs/**/*.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -178,12 +177,14 @@ export const config: Options.Testrunner = {
      * @param {Array.<Object>} capabilities list of capabilities details
      */
     // @ts-ignore: noUnusedParameters
-    onPrepare: async function (config, capabilities) {
+    onPrepare: async function (config) {
         const processList = await findProcess('port', 4723);
         if (processList.length > 0) {
-            processList.forEach(p => process.kill(p.pid));
+            processList.forEach((proc) => {
+                process.kill(proc.pid);
+            });
+            setTimeout(() => { console.log(`Terminated lingering Appium processes on port ${config.port}`); }, 1000);
         }
-        console.log(`Terminated lingering Appium processes on port ${config.port}`);
     },
     /**
      * Gets executed before a worker process is spawned and can be used to initialize specific service
@@ -273,7 +274,6 @@ export const config: Options.Testrunner = {
             await driver.saveScreenshot(`./errorShots/${test.title.replaceAll(" ", "_")}.png`);
         }
     },
-
 
     /**
      * Hook that gets executed after the suite has ended
