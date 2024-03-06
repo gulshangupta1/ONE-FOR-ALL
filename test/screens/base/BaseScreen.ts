@@ -104,7 +104,11 @@ export class BaseScreen {
         else await element.waitForDisplayed();
     }
 
-    async swipeTillElement(element: string | WebdriverIO.Element, maxScrollAttempts: number = 5): Promise<boolean> {
+    protected async swipeTillElement(
+        element: string | WebdriverIO.Element,
+        maxScrollAttempts: number = 5,
+        swipeUp: boolean = false
+    ): Promise<boolean> {
         let elementFound: boolean = false;
         element = await this.getElement(element);
 
@@ -116,7 +120,8 @@ export class BaseScreen {
                     elementFound = true;
                     break;
                 }
-                await this.swipeUtils.swipeByPercentage();
+                if (!swipeUp) await this.swipeUtils.swipeByPercentage();
+                else await this.swipeUtils.swipeUpByPercentage();
             }
             if (!elementFound) LOGGER.warn(`Element not found after ${maxScrollAttempts} swipe attempts.`);
 
@@ -127,14 +132,19 @@ export class BaseScreen {
         }
     }
 
-    async swipeHorizontalOnSectionTillElement(section: string | WebdriverIO.Element, element: string | WebdriverIO.Element, maxScrollAttempts: number = 5): Promise<boolean> {
+    protected async swipeHorizontalInSectionTillElement(
+        section: string | WebdriverIO.Element,
+        element: string | WebdriverIO.Element,
+        maxScrollAttempts: number = 5,
+        LTR: boolean = false
+    ): Promise<boolean> {
         let elementFound: boolean = false;
 
         try {
             section = await this.getElement(section);
             element = await this.getElement(element);
 
-            await this.swipeTillElement(section);
+            // await this.swipeTillElement(section);
             await this.waitForDisplayed(section);
             const elementSize = await section.getSize();
             const elementLocation = await section.getLocation();
@@ -151,7 +161,8 @@ export class BaseScreen {
                     break;
                 }
 
-                await this.swipeUtils.horizontalSwipe(startX, endX, y, y);
+                if (!LTR) await this.swipeUtils.horizontalSwipe(startX, endX, y);
+                else await this.swipeUtils.horizontalSwipe(endX, startX, y);
             }
             if (!elementFound) LOGGER.warn(`Element not found after ${maxScrollAttempts} swipe attempts.`);
 
