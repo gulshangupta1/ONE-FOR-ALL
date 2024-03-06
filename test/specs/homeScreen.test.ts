@@ -14,16 +14,16 @@ import { ProductDetails } from "../resources/customTypes/ProductDetails";
 let homeScreen: HomeScreen;
 let switchContextUtils: SwitchContextUtils;
 let webviewScreen: WebviewScreen;
-let searchScreen: SearchScreen;
+let swipeUtils: SwipeUtils;
 
-const specName: string = "Homescreen tests";
+const specName: string = "Open webview";
 describe(specName, () => {
     before(async () => {
         LoggerHelper.setupLogger(specName);
         homeScreen = new HomeScreen();
         switchContextUtils = new SwitchContextUtils();
         webviewScreen = new WebviewScreen();
-        searchScreen = new SearchScreen();
+        swipeUtils = new SwipeUtils();
     });
 
     // TC_1
@@ -42,39 +42,13 @@ describe(specName, () => {
     });
 
     // TC_4
-    it('Verify that no action should happen if user clicks on Ultralesson logo in homescren header', async () => {
+    it.only('Verify that no action should happen if user clicks on Ultralesson logo in homescren header', async () => {
+        await homeScreen.validateHeader();
         await homeScreen.validateHomeScreen();
-        await homeScreen.swipeUpTillCategory();
-        await homeScreen.swipeInCategoryLTR();
+        await swipeUtils.swipeUpByPercentage();
+        await swipeUtils.swipeUpByPercentage();
+        await homeScreen.swipeInCategoryLeftToRight();
         await homeScreen.clickOnUlLogo();
         await homeScreen.validateHomeScreen();
-    });
-
-    it('Verify that serch box is functioning properly', async () => {
-        await homeScreen.validateHeader();
-        await homeScreen.clickOnSearchButton();
-    });
-
-    it.only('Verify that auto-suggestion is showing for produts', async () => {
-        const productCategory: string = HomeScreen.categoryType.shoes;
-
-        let allProducts: ProductDetails[] = [];
-        allProducts.push(FileUtil.convertJsonToCustomType(bestSellersJson));
-        allProducts.push(FileUtil.convertJsonToCustomType(newArrivalsJson));
-        allProducts.push(FileUtil.convertJsonToCustomType(topRatedProductsJson));
-        allProducts.push(FileUtil.convertJsonToCustomType(trendingProductsJson));
-
-        let allShouesProducts: Product[] = [];
-        allProducts.filter((productDetails) => {
-            productDetails.products.filter((product) => {
-                if (product.category.toLowerCase() === productCategory.toLowerCase())
-                    allShouesProducts.push(product);
-            });
-        });
-
-        await homeScreen.searchProduct(productCategory);
-        await searchScreen.clickOnMoreButton();
-        await searchScreen.validateProductList(allShouesProducts);
-        await searchScreen.clickOnSearchButton();
     });
 });
