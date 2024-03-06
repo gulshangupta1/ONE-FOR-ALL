@@ -104,7 +104,11 @@ export class BaseScreen {
         else await element.waitForDisplayed();
     }
 
-    protected async swipeTillElement(element: string | WebdriverIO.Element, maxScrollAttempts: number = 5): Promise<boolean> {
+    protected async swipeTillElement(
+        element: string | WebdriverIO.Element,
+        maxScrollAttempts: number = 5,
+        swipeUp: boolean = false
+    ): Promise<boolean> {
         let elementFound: boolean = false;
         element = await this.getElement(element);
 
@@ -128,30 +132,12 @@ export class BaseScreen {
         }
     }
 
-    protected async swipeUpTillElement(element: string | WebdriverIO.Element, maxScrollAttempts: number = 5): Promise<boolean> {
-        let elementFound: boolean = false;
-        element = await this.getElement(element);
-
-        let isElementDisplayed: boolean = false;
-        try {
-            for (let attempt = 0; attempt < maxScrollAttempts; attempt++) {
-                isElementDisplayed = await element.isDisplayed();
-                if (isElementDisplayed) {
-                    elementFound = true;
-                    break;
-                }
-                await this.swipeUtils.swipeUpByPercentage();
-            }
-            if (!elementFound) LOGGER.warn(`Element not found after ${maxScrollAttempts} swipe attempts.`);
-
-            return elementFound;
-        } catch (err) {
-            LOGGER.error(`Error performing swipe: \n${err.stack}`);
-            throw err;
-        }
-    }
-
-    protected async swipeHorizontalOnSectionTillElement(section: string | WebdriverIO.Element, element: string | WebdriverIO.Element, maxScrollAttempts: number = 5): Promise<boolean> {
+    protected async swipeHorizontalInSectionTillElement(
+        section: string | WebdriverIO.Element,
+        element: string | WebdriverIO.Element,
+        maxScrollAttempts: number = 5,
+        LTR: boolean = false
+    ): Promise<boolean> {
         let elementFound: boolean = false;
 
         try {
@@ -175,42 +161,8 @@ export class BaseScreen {
                     break;
                 }
 
-                await this.swipeUtils.horizontalSwipe(startX, endX, y);
-            }
-            if (!elementFound) LOGGER.warn(`Element not found after ${maxScrollAttempts} swipe attempts.`);
-
-            return elementFound;
-        } catch (err) {
-            LOGGER.error(`Error performing horizontal swipe on section.\n${err.stack}`);
-            throw err;
-        }
-    }
-
-    protected async swipeHorizontalOnSectionLeftToRightTillElement(section: string | WebdriverIO.Element, element: string | WebdriverIO.Element, maxScrollAttempts: number = 5): Promise<boolean> {
-        let elementFound: boolean = false;
-
-        try {
-            section = await this.getElement(section);
-            element = await this.getElement(element);
-
-            // await this.swipeTillElement(section);
-            await this.waitForDisplayed(section);
-            const elementSize = await section.getSize();
-            const elementLocation = await section.getLocation();
-
-            const y: number = elementLocation.y + (elementSize.height * 0.5);
-            const endX: number = elementLocation.x + (elementSize.width * 0.9);
-            const startX: number = elementLocation.x + (elementSize.width * 0.1);
-
-            let isElementDisplayed: boolean = false;
-            for (let attempt = 0; attempt < maxScrollAttempts; attempt++) {
-                isElementDisplayed = await element.isDisplayed();
-                if (isElementDisplayed) {
-                    elementFound = true;
-                    break;
-                }
-
-                await this.swipeUtils.horizontalSwipe(startX, endX, y);
+                if (!LTR) await this.swipeUtils.horizontalSwipe(startX, endX, y);
+                else await this.swipeUtils.horizontalSwipe(endX, startX, y);
             }
             if (!elementFound) LOGGER.warn(`Element not found after ${maxScrollAttempts} swipe attempts.`);
 
