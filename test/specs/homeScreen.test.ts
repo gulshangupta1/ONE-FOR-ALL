@@ -4,8 +4,8 @@ import { HomeScreen } from "../screens/HomeScreen";
 import { WebviewScreen } from "../screens/WebviewScreen";
 import { Product } from "../resources/customTypes/ProductDetails";
 import { SearchScreen } from "../screens/SearchScreen";
-import { CategoryType } from "../resources/customTypes/enums";
 import { FilterProductsUtils } from "../commonFunctions/FilterProductsUtils";
+import { CategoryType } from "../resources/customTypes/enums";
 
 let homeScreen: HomeScreen;
 let switchContextUtils: SwitchContextUtils;
