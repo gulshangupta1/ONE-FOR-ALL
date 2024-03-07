@@ -23,6 +23,7 @@ export class HomeScreen extends BaseScreen {
         productsSectionDynamic: "(//android.widget.TextView[@text='##PLACEHOLDER##']/parent::*/parent::*/child::*)[3]",
         exploreMoreButton: "#icon-plus-circle",
         footer: "#txt-footer",
+        profileIcon: "#icon-profile"
     };
 
     async clickOnBagIcon(): Promise<void> {
@@ -31,6 +32,10 @@ export class HomeScreen extends BaseScreen {
 
     async clickOnUlLogo(): Promise<void> {
         await this.click(this.locators.ultralessonLogo);
+    }
+
+    async getUltraLessonLogoEle(): Promise<WebdriverIO.Element> {
+        return await this.getElement(this.locators.ultralessonLogo);
     }
 
     async clickOnSearchButton(): Promise<void> {
@@ -44,6 +49,10 @@ export class HomeScreen extends BaseScreen {
         await this.clickOnSearchButton();
         await this.setValue(this.locators.exploreSearchButton, productName);
         await driver.hideKeyboard();
+    }
+
+    async clickProfileIcon(): Promise<void> {
+        await this.click(this.locators.profileIcon);
     }
 
     async clickOnExploreMoreButton(sectionType: SectionType): Promise<void> {
