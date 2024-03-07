@@ -171,6 +171,7 @@ export const config: Options.Testrunner = {
     // it and to build services around it. You can either apply a single function or an array of
     // methods to it. If one of them returns with a promise, WebdriverIO will wait until that promise got
     // resolved to continue.
+
     /**
      * Gets executed once before all workers get launched.
      * @param {object} config wdio configuration object
@@ -183,9 +184,12 @@ export const config: Options.Testrunner = {
             processList.forEach((proc) => {
                 process.kill(proc.pid);
             });
-            setTimeout(() => { console.log(`Terminated lingering Appium processes on port ${config.port}`); }, 1000);
+            setTimeout(() => {
+                console.log(`Terminated lingering Appium processes on port ${config.port}`);
+            }, 2000);
         }
     },
+
     /**
      * Gets executed before a worker process is spawned and can be used to initialize specific service
      * for that worker as well as modify runtime environments in an async fashion.

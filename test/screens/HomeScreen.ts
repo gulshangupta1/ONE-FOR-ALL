@@ -1,5 +1,6 @@
 import { XpathUtil } from "../../utils/common/XpathUtil";
 import { LOGGER } from "../../utils/reporting/LoggerHelper";
+import { CategoryType, SectionType } from "../resources/customTypes/enums";
 import { BaseScreen } from "./base/BaseScreen";
 import { expect } from "chai";
 
@@ -24,22 +25,6 @@ export class HomeScreen extends BaseScreen {
         footer: "#txt-footer",
     };
 
-    static sectionType = {
-        newArrivals: "New Arrivals",
-        trendingProducts: "Trending Products",
-        topRatedProducts: "Top-Rated Products",
-        bestSellers: "Best Sellers"
-    };
-
-    static categoryType = {
-        clothing: "Clothing",
-        shoes: "Shoes",
-        furniture: "Furniture",
-        toys: "Toys",
-        audioSets: "Audio sets",
-        books: "Books"
-    };
-
     async clickOnBagIcon(): Promise<void> {
         await this.click(this.locators.bagIcon);
     }
@@ -61,31 +46,31 @@ export class HomeScreen extends BaseScreen {
         await driver.hideKeyboard();
     }
 
-    async clickOnExploreMoreButton(sectionType: string): Promise<void> {
+    async clickOnExploreMoreButton(sectionType: SectionType): Promise<void> {
         try {
             await this.waitForDisplayed(this.locators.bagIcon);
             switch (sectionType) {
-                case HomeScreen.sectionType.newArrivals:
+                case SectionType.NewArrivals:
                     await this.swipeHorizontalInSectionTillElement(
                         XpathUtil.getPlaceholderReplaced(this.locators.productsSectionDynamic, sectionType),
                         this.locators.exploreMoreButton
                     );
                     break;
-                case HomeScreen.sectionType.trendingProducts:
+                case SectionType.TrendingProducts:
                     await this.swipeTillElement(XpathUtil.getPlaceholderReplaced(this.locators.sectionTitle, sectionType));
                     await this.swipeHorizontalInSectionTillElement(
                         XpathUtil.getPlaceholderReplaced(this.locators.productsSectionDynamic, sectionType),
                         this.locators.exploreMoreButton
                     );
                     break;
-                case HomeScreen.sectionType.topRatedProducts:
+                case SectionType.TopRatedProducts:
                     await this.swipeTillElement(XpathUtil.getPlaceholderReplaced(this.locators.sectionTitle, sectionType));
                     await this.swipeHorizontalInSectionTillElement(
                         XpathUtil.getPlaceholderReplaced(this.locators.productsSectionDynamic, sectionType),
                         this.locators.exploreMoreButton
                     );
                     break;
-                case HomeScreen.sectionType.bestSellers:
+                case SectionType.BestSellers:
                     await this.swipeTillElement(this.locators.footer);
                     await this.swipeHorizontalInSectionTillElement(
                         XpathUtil.getPlaceholderReplaced(this.locators.productsSectionDynamic, sectionType),
@@ -101,42 +86,42 @@ export class HomeScreen extends BaseScreen {
         }
     }
 
-    async swipeInCategoryTill(categoryType: string): Promise<boolean> {
+    async swipeInCategoryTill(categoryType: CategoryType): Promise<boolean> {
         try {
             await this.waitForDisplayed(this.locators.bagIcon);
             let isCategoryFound: boolean = false;
             switch (categoryType) {
-                case HomeScreen.categoryType.clothing:
+                case CategoryType.Clothing:
                     isCategoryFound = await this.swipeHorizontalInSectionTillElement(
                         XpathUtil.getPlaceholderReplaced(this.locators.categorySectionByName, categoryType),
                         XpathUtil.getPlaceholderReplaced(this.locators.category, categoryType)
                     );
                     break;
-                case HomeScreen.categoryType.shoes:
+                case CategoryType.Shoes:
                     isCategoryFound = await this.swipeHorizontalInSectionTillElement(
                         XpathUtil.getPlaceholderReplaced(this.locators.categorySectionByName, categoryType),
                         XpathUtil.getPlaceholderReplaced(this.locators.category, categoryType)
                     );
                     break;
-                case HomeScreen.categoryType.furniture:
+                case CategoryType.Furniture:
                     isCategoryFound = await this.swipeHorizontalInSectionTillElement(
                         XpathUtil.getPlaceholderReplaced(this.locators.categorySectionByName, categoryType),
                         XpathUtil.getPlaceholderReplaced(this.locators.category, categoryType)
                     );
                     break;
-                case HomeScreen.categoryType.toys:
+                case CategoryType.Toys:
                     isCategoryFound = await this.swipeHorizontalInSectionTillElement(
                         XpathUtil.getPlaceholderReplaced(this.locators.categorySectionByName, categoryType),
                         XpathUtil.getPlaceholderReplaced(this.locators.category, categoryType)
                     );
                     break;
-                case HomeScreen.categoryType.audioSets:
+                case CategoryType.AudioSets:
                     isCategoryFound = await this.swipeHorizontalInSectionTillElement(
-                        XpathUtil.getPlaceholderReplaced(this.locators.categorySectionByName, HomeScreen.categoryType.furniture),
+                        XpathUtil.getPlaceholderReplaced(this.locators.categorySectionByName, CategoryType.Furniture),
                         XpathUtil.getPlaceholderReplaced(this.locators.category, categoryType)
                     );
                     break;
-                case HomeScreen.categoryType.books:
+                case CategoryType.Books:
                     isCategoryFound = await this.swipeHorizontalInSectionTillElement(
                         XpathUtil.getPlaceholderReplaced(this.locators.categorySectionByName, categoryType),
                         XpathUtil.getPlaceholderReplaced(this.locators.category, categoryType)
@@ -154,8 +139,8 @@ export class HomeScreen extends BaseScreen {
 
     async swipeInCategoryLTR(): Promise<boolean> {
         return await this.swipeHorizontalInSectionTillElement(
-            XpathUtil.getPlaceholderReplaced(this.locators.categorySectionByName, HomeScreen.categoryType.toys),
-            XpathUtil.getPlaceholderReplaced(this.locators.category, HomeScreen.categoryType.clothing),
+            XpathUtil.getPlaceholderReplaced(this.locators.categorySectionByName, CategoryType.Toys),
+            XpathUtil.getPlaceholderReplaced(this.locators.category, CategoryType.Clothing),
             3,
             true
         );
@@ -163,16 +148,18 @@ export class HomeScreen extends BaseScreen {
 
     async swipeUpTillCategory(): Promise<boolean> {
         const category =
-            await this.isDisplayed(XpathUtil.getPlaceholderReplaced(this.locators.category, HomeScreen.categoryType.clothing))
-                ? HomeScreen.categoryType.clothing
-                : HomeScreen.categoryType.books;
+            await this.isDisplayed(XpathUtil.getPlaceholderReplaced(this.locators.category, CategoryType.Clothing))
+                ? CategoryType.Clothing
+                : CategoryType.Books;
         return await this.swipeTillElement(category, 3, true);
     }
 
-    async clickOnCategory(category: string) {
+    async clickOnCategory(category: CategoryType) {
         try {
+            await this.waitForDisplayed(this.locators.bagIcon);
+            // await this.swipeInCategoryTill(category);
             await this.swipeInCategoryTill(category);
-            await this.click(this.locators.category);
+            await this.click(XpathUtil.getPlaceholderReplaced(this.locators.category, category));
         } catch (err) {
             LOGGER.error(`Error while clicking on category: ${category}\n${err.stack}`);
             throw err;
@@ -180,26 +167,43 @@ export class HomeScreen extends BaseScreen {
     }
 
     async validateHeader(username?: string): Promise<void> {
-        await this.waitForDisplayed(this.locators.browseAndBuyHeadText);
-        await this.waitForDisplayed(this.locators.bagIcon);
-        if (username !== undefined) await this.waitForDisplayed(XpathUtil.getPlaceholderReplaced(this.locators.userNameHeadText, username));
-        else await this.waitForDisplayed(this.locators.welcomeBackText);
-        await this.waitForDisplayed(this.locators.ultralessonLogo);
+        try {
+            await this.waitForDisplayed(this.locators.browseAndBuyHeadText);
+            await this.waitForDisplayed(this.locators.bagIcon);
+            if (username !== undefined)
+                await this.waitForDisplayed(XpathUtil.getPlaceholderReplaced(this.locators.userNameHeadText, username));
+            else await this.waitForDisplayed(this.locators.welcomeBackText);
+            await this.waitForDisplayed(this.locators.ultralessonLogo);
+        } catch (err) {
+            LOGGER.error(`Error while validating header.\n${err.stack}`);
+            throw err;
+        }
     }
 
     async validateHomeScreen(username?: string): Promise<void> {
+        // Validate header
         await this.validateHeader(username);
         // Validating all category should display
-        expect(await this.swipeInCategoryTill(HomeScreen.categoryType.clothing)).to.be.true;
-        expect(await this.swipeInCategoryTill(HomeScreen.categoryType.shoes)).to.be.true;
-        expect(await this.swipeInCategoryTill(HomeScreen.categoryType.furniture)).to.be.true;
-        expect(await this.swipeInCategoryTill(HomeScreen.categoryType.toys)).to.be.true;
-        expect(await this.swipeInCategoryTill(HomeScreen.categoryType.audioSets)).to.be.true;
-        expect(await this.swipeInCategoryTill(HomeScreen.categoryType.books)).to.be.true;
+        expect(await this.swipeInCategoryTill(CategoryType.Clothing), "Clothing category did not displayed.").to.be.true;
+        expect(await this.swipeInCategoryTill(CategoryType.Shoes), "Shoes category did not displayed.").to.be.true;
+        expect(await this.swipeInCategoryTill(CategoryType.Furniture), "Furniture category did not displayed.").to.be.true;
+        expect(await this.swipeInCategoryTill(CategoryType.Toys), "Toys category did not displayed.").to.be.true;
+        expect(await this.swipeInCategoryTill(CategoryType.AudioSets), "AudioSets category did not displayed.").to.be.true;
+        expect(await this.swipeInCategoryTill(CategoryType.Books), "Books category did not displayed.").to.be.true;
         // Validating all section should display
-        expect(await this.swipeTillElement(XpathUtil.getPlaceholderReplaced(this.locators.sectionTitle, HomeScreen.sectionType.newArrivals))).to.be.true;
-        expect(await this.swipeTillElement(XpathUtil.getPlaceholderReplaced(this.locators.sectionTitle, HomeScreen.sectionType.trendingProducts))).to.be.true;
-        expect(await this.swipeTillElement(XpathUtil.getPlaceholderReplaced(this.locators.sectionTitle, HomeScreen.sectionType.topRatedProducts))).to.be.true;
-        expect(await this.swipeTillElement(XpathUtil.getPlaceholderReplaced(this.locators.sectionTitle, HomeScreen.sectionType.bestSellers))).to.be.true;
+        expect(await this.swipeTillElement(XpathUtil.getPlaceholderReplaced(this.locators.sectionTitle, SectionType.NewArrivals)),
+            "New Arrivals Section did not displayed."
+        ).to.be.true;
+        expect(await this.swipeTillElement(XpathUtil.getPlaceholderReplaced(this.locators.sectionTitle, SectionType.TrendingProducts)),
+            "Trending Products Section did not displayed."
+        ).to.be.true;
+        expect(await this.swipeTillElement(XpathUtil.getPlaceholderReplaced(this.locators.sectionTitle, SectionType.TopRatedProducts)),
+            "Top-Rated Products Section did not displayed."
+        ).to.be.true;
+        expect(await this.swipeTillElement(XpathUtil.getPlaceholderReplaced(this.locators.sectionTitle, SectionType.BestSellers)),
+            "Best Sellers Products Section did not displayed."
+        ).to.be.true;
+        // Validate footer
+        expect(await this.swipeTillElement(this.locators.footer), "Footer did not displayed").to.be.true;
     }
 }
