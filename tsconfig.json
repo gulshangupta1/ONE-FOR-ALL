@@ -20,8 +20,8 @@
         "resolveJsonModule": true,
         "isolatedModules": true,
         "strict": false,
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
         "esModuleInterop": true
     },
