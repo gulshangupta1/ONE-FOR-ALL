@@ -42,7 +42,8 @@ export class MyCartScreen extends BaseScreen {
         const totalPrice: number = productList.reduce((total, product) => total + product.price, 0);
         const totalPriceUi = await this.getText(this.locators.totalPrice);
         expect(parseFloat(totalPriceUi.substring(totalPriceUi.indexOf(" ") + 1)),
-            "Total price is not matching").to.be.equal(totalPrice);
+            "Total price is not matching"
+        ).to.be.equal(totalPrice);
 
         for (const product of productList) {
             expect(await this.swipeTillElement(XpathUtil.getPlaceholderReplaced(this.locators.productByName, product.name)),

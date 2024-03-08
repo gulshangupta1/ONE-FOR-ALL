@@ -40,8 +40,7 @@ describe(specName, () => {
         await productScreen.clickGoToCartButton();
         await myCartScreen.validateMyCartScreen([productDetails]);
         await myCartScreen.clickPlaceOrderButton();
-        await
-            await myCartScreen.clickContinueShoppingButton();
+        await myCartScreen.clickContinueShoppingButton();
         await homeScreen.validateHeader(loginDetails.username);
     });
 });
