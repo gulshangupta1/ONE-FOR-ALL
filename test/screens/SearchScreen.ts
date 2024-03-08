@@ -13,7 +13,8 @@ export class SearchScreen extends BaseScreen {
         moreButton: "#txt-more",
         productEle: "#ele-auto-suggestion",
         productNameEle: "//android.widget.TextView[@text='##PLACEHOLDER##']",
-        searchButton: "#btn-search"
+        searchButton: "#btn-search",
+        productByName: "//android.widget.TextView[@text='##PLACEHOLDER##']"
     }
 
     async clickOnMoreButton(): Promise<void> {
@@ -22,6 +23,10 @@ export class SearchScreen extends BaseScreen {
 
     async clickOnSearchButton(): Promise<void> {
         await this.click(this.locators.searchButton);
+    }
+
+    async selectProductByName(productName: string): Promise<void> {
+        await this.click(XpathUtil.getPlaceholderReplaced(this.locators.productByName, productName));
     }
 
     async validateProductList(productList: Product[]): Promise<void> {

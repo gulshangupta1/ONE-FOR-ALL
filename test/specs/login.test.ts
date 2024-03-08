@@ -17,6 +17,6 @@ describe(specName, () => {
         const loginDetails: LoginDetails = FileUtil.convertJsonToCustomType(loginDetailsJson);
         const otp: string = "0000";
 
-        await loginUtils.login(loginDetails.email, loginDetails.password, otp);
+        await loginUtils.login(loginDetails, otp);
     });
 });

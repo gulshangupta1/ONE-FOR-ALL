@@ -1,3 +1,4 @@
+import { LoginDetails } from "../resources/customTypes/LoginDetails";
 import { HomeScreen } from "../screens/HomeScreen";
 import { LoginScreen } from "../screens/LoginScreen";
 import { OtpScreen } from "../screens/OtpScreen";
@@ -18,13 +19,13 @@ export class LoginUtils extends BaseScreen {
         this.homeScreen = new HomeScreen();
     }
 
-    async login(email: string, password: string, otp: string) {
+    async login(loginDetails: LoginDetails, otp: string) {
         await this.homeScreen.clickProfileIcon();
         await this.welcomeScreen.clickLoginButton();
-        await this.loginScreen.enterLoginDetails(email, password);
+        await this.loginScreen.enterLoginDetails(loginDetails.email, loginDetails.password);
         await this.loginScreen.clickLoginButton();
         await this.otpScreen.enterOtp(otp);
         await this.otpScreen.clickVerifyButton();
-        await this.waitForDisplayed(await this.homeScreen.getUltraLessonLogoEle());
+        await this.homeScreen.validateHeader(loginDetails.username);
     }
 }

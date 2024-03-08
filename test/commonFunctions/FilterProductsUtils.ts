@@ -24,8 +24,8 @@ export class FilterProductsUtils extends BaseScreen {
             productDetails.products.filter(product => {
                 if (
                     (product.category.toLowerCase() === category.toLowerCase())
-                    && (parseInt(product.price) > minPrice)
-                    && (parseInt(product.price) < maxPrice)
+                    && (product.price > minPrice)
+                    && (product.price < maxPrice)
                 )
                     allMatchingProducts.push(product);
             });

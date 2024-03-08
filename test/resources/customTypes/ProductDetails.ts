@@ -10,7 +10,7 @@ export interface Product {
     description: string,
     category: string,
     brand: string,
-    price: string,
+    price: number,
     discounted_price: number,
     stock_quantity: number,
     image_url: string,
