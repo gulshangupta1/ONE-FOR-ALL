@@ -34,10 +34,6 @@ export class HomeScreen extends BaseScreen {
         await this.click(this.locators.ultralessonLogo);
     }
 
-    async getUltraLessonLogoEle(): Promise<WebdriverIO.Element> {
-        return await this.getElement(this.locators.ultralessonLogo);
-    }
-
     async clickOnSearchButton(): Promise<void> {
         await this.click(this.locators.searchField);
         await this.click(this.locators.exploreSearchButton);
