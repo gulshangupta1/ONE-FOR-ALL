@@ -1,5 +1,5 @@
-import { XpathUtil } from "../../utils/common/XpathUtil";
-import { LOGGER } from "../../utils/reporting/LoggerHelper";
+import { XpathUtil } from "../../../utils/common/XpathUtil";
+import { LOGGER } from "../../../utils/reporting/LoggerHelper";
 import { CategoryType, SectionType } from "../resources/customTypes/enums";
 import { BaseScreen } from "./base/BaseScreen";
 import { expect } from "chai";

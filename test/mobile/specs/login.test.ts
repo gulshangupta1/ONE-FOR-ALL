@@ -1,5 +1,5 @@
-import { FileUtil } from "../../utils/file/FileUtil";
-import { LoggerHelper } from "../../utils/reporting/LoggerHelper";
+import { FileUtil } from "../../../utils/file/FileUtil";
+import { LoggerHelper } from "../../../utils/reporting/LoggerHelper";
 import { LoginUtils } from "../commonFunctions/LoginUtils";
 import { LoginDetails } from "../resources/customTypes/LoginDetails";
 import * as loginDetailsJson from "./../resources/testdata/loginDetails.json";

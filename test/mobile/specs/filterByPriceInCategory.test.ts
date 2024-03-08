@@ -23,7 +23,7 @@ describe(specName, () => {
         await driver.activateApp(packageName);
     });
 
-    it('Visit in clothing category and filter by price (min & max)', async () => {
+    it('Visit in clothing category and filter by price (min: 100 & max: 500)', async () => {
         const productCategory = CategoryType.Clothing;
         const minPrice: number = 100;
         const maxPrice: number = 500;
@@ -36,7 +36,7 @@ describe(specName, () => {
             `Products price is not between ${minPrice} and ${maxPrice}`).to.be.true;
     });
 
-    it('Visit in shoes category and filter by price (min & max)', async () => {
+    it('Visit in shoes category and filter by price (min: 100 & max: 500)', async () => {
         const productCategory = CategoryType.Shoes;
         const minPrice: number = 100;
         const maxPrice: number = 500;
@@ -49,7 +49,7 @@ describe(specName, () => {
             `Products price is not between ${minPrice} and ${maxPrice}`).to.be.true;
     });
 
-    it('Visit in furniture category and filter by price (min & max)', async () => {
+    it('Visit in furniture category and filter by price (min: 99 & max: 250)', async () => {
         const productCategory = CategoryType.Furniture;
         const minPrice: number = 99;
         const maxPrice: number = 250;
@@ -62,7 +62,7 @@ describe(specName, () => {
             `Products price is not between ${minPrice} and ${maxPrice}`).to.be.true;
     });
 
-    it('Visit in toys category and filter by price (min & max)', async () => {
+    it('Visit in toys category and filter by price (min: 150 & max: 300)', async () => {
         const productCategory = CategoryType.Toys;
         const minPrice: number = 150;
         const maxPrice: number = 300;
@@ -75,7 +75,7 @@ describe(specName, () => {
             `Products price is not between ${minPrice} and ${maxPrice}`).to.be.true;
     });
 
-    it('Visit in audio sets category and filter by price (min & max)', async () => {
+    it('Visit in audio sets category and filter by price (min: 100 & max: 400)', async () => {
         const productCategory = CategoryType.AudioSets;
         const minPrice: number = 100;
         const maxPrice: number = 400;
@@ -88,7 +88,7 @@ describe(specName, () => {
             `Products price is not between ${minPrice} and ${maxPrice}`).to.be.true;
     });
 
-    it('Visit in books category and filter by price (min & max)', async () => {
+    it('Visit in books category and filter by price (min: 20 & max: 100)', async () => {
         const productCategory = CategoryType.Books;
         const minPrice: number = 20;
         const maxPrice: number = 100;
