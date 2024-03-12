@@ -1,4 +1,4 @@
-import { BaseResponse } from "../bseResponse"
+import { BaseResponse } from "../base.response"
 
 export interface GetProductsResponseBody extends BaseResponse {
     products: Product[]
