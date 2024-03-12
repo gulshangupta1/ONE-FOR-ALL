@@ -5,13 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "wdio": "wdio run ./wdio.conf.ts"
+    "wdio": "wdio run ./wdio.conf.ts",
+    "api": "mocha --require ts-node/register ./test/api/specs/getAllUsers.test.ts --timeout=20000"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gulshan",
   "license": "ISC",
   "dependencies": {
+    "@types/axios": "^0.14.0",
     "@wdio/cli": "^8.32.3",
+    "axios": "^1.6.7",
     "find-process": "^1.4.7",
     "winston": "^3.11.0"
   },
@@ -27,6 +30,6 @@
     "appium-uiautomator2-driver": "^3.0.1",
     "chai": "^4.3.10",
     "ts-node": "^10.9.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.2"
   }
 }
