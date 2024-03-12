@@ -1,5 +1,5 @@
-import { SwipeUtils } from "../../utils/actions/SwipeUtils";
-import { LOGGER } from "../../utils/reporting/LoggerHelper";
+import { SwipeUtils } from "../../../utils/actions/SwipeUtils";
+import { LOGGER } from "../../../utils/reporting/LoggerHelper";
 import { BaseScreen } from "./base/BaseScreen";
 
 export class FilterScreen extends BaseScreen {

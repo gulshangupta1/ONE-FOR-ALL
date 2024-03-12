@@ -1,4 +1,4 @@
-import { XpathUtil } from "../../utils/common/XpathUtil";
+import { XpathUtil } from "../../../utils/common/XpathUtil";
 import { Product } from "../resources/customTypes/ProductDetails";
 import { BaseScreen } from "./base/BaseScreen";
 import { expect } from "chai";

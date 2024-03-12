@@ -34,7 +34,7 @@ export const config: Options.Testrunner = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './test/specs/**/*.ts'
+        './test/mobile/specs/**/*.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -160,7 +160,7 @@ export const config: Options.Testrunner = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000 * 3
+        timeout: 60000 * 5
     },
 
     //

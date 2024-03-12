@@ -1,5 +1,5 @@
-import { SwitchContextUtils } from "../../utils/actions/SwitchContextUtils";
-import { LoggerHelper } from "../../utils/reporting/LoggerHelper";
+import { SwitchContextUtils } from "../../../utils/actions/SwitchContextUtils";
+import { LoggerHelper } from "../../../utils/reporting/LoggerHelper";
 import { HomeScreen } from "../screens/HomeScreen";
 import { WebviewScreen } from "../screens/WebviewScreen";
 import { Product } from "../resources/customTypes/ProductDetails";

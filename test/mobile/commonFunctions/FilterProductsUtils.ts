@@ -1,4 +1,4 @@
-import { FileUtil } from "../../utils/file/FileUtil";
+import { FileUtil } from "../../../utils/file/FileUtil";
 import { Product, ProductDetails } from "../resources/customTypes/ProductDetails";
 import { CategoryType } from "../resources/customTypes/enums";
 import { BaseScreen } from "../screens/base/BaseScreen";
