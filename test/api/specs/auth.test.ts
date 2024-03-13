@@ -9,6 +9,8 @@ import { LoginResponseBody } from "../models/response/auth/login.response";
 
 let authService: AuthService;
 let randomUtil: RandomUtil;
+let signUpRequestBody: SignUpRequestBody;
+let signUpResponseBody: SignUpResponseBody;
 
 const specName: string = "Get products";
 describe("Get products", () => {
@@ -18,12 +20,17 @@ describe("Get products", () => {
         randomUtil = new RandomUtil();
     });
 
-    it.only("Should be able to sign-up", async () => {
-        const signUpRequestBody: SignUpRequestBody = {
+    beforeEach(async () => {
+        // Sign-Up
+        signUpRequestBody = {
             email: randomUtil.getRandomGmail().toLowerCase(),
             password: randomUtil.getRandomPassword(6)
         };
-        const signUpResponseBody: SignUpResponseBody = await authService.signUp(signUpRequestBody);
+
+        signUpResponseBody = await authService.signUp(signUpRequestBody);
+    });
+
+    it("Should be able to sign-up", async () => {
         expect(signUpResponseBody.status).to.be.equal(201);
         expect(signUpResponseBody.data.user.email).to.be.equal(signUpRequestBody.email);
         expect(signUpResponseBody.data.user.id).not.null;
@@ -31,20 +38,13 @@ describe("Get products", () => {
     });
 
     it("Should be able to login", async () => {
-        // sign-up
-        const signUpRequestBody: SignUpRequestBody = {
-            email: randomUtil.getRandomGmail().toLowerCase(),
-            password: randomUtil.getRandomPassword(6)
-        };
-        const signUpResponseBody: SignUpResponseBody = await authService.signUp(signUpRequestBody);
-        expect(signUpResponseBody.status).to.be.equal(201);
-
-        // login
+        // Login
         const loginRequestBody: LoginRequestBody = {
             email: signUpRequestBody.email,
             password: signUpRequestBody.password
         };
         const loginResponseBody: LoginResponseBody = await authService.login(loginRequestBody);
+
         expect(loginResponseBody.status).to.be.equal(200);
         expect(loginResponseBody.data.user.email).to.be.equal(signUpRequestBody.email);
         expect(loginResponseBody.data.session.access_token).not.null;

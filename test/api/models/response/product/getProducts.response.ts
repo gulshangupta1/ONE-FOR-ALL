@@ -4,7 +4,7 @@ export interface GetProductsResponseBody extends BaseResponse {
     products: Product[]
 }
 
-interface Product {
+export interface Product {
     created_at: string,
     name: string,
     description: string,
