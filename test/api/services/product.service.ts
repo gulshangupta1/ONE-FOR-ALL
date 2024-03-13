@@ -13,7 +13,7 @@ export class ProductService extends BaseService {
         });
 
         const getProductsResponseBody: GetProductsResponseBody = {
-            statusCode: response.status,
+            status: response.status,
             statusText: response.statusText,
             products: response.data.products
         }
