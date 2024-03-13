@@ -1,5 +1,4 @@
 export interface BaseResponse {
-    statusCode: number,
-    statusText: string,
-    headers?: any
+    status: number,
+    statusText: string
 }
