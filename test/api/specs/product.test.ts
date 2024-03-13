@@ -7,7 +7,6 @@ import { AuthService } from "../services/auth.service";
 import { ProductService } from "../services/product.service";
 import { expect } from "chai";
 
-let randomUtil: RandomUtil;
 let authService: AuthService;
 let productService: ProductService;
 let signUpRequestBody: SignUpRequestBody
@@ -17,15 +16,14 @@ const specName: string = "Product tests";
 describe(specName, () => {
     before(async () => {
         LoggerHelper.setupLogger(specName);
-        randomUtil = new RandomUtil();
         authService = new AuthService();
         productService = new ProductService();
     });
 
     beforeEach(async () => {
         signUpRequestBody = {
-            email: randomUtil.getRandomGmail().toLowerCase(),
-            password: randomUtil.getRandomPassword(6)
+            email: RandomUtil.getRandomGmail().toLowerCase(),
+            password: RandomUtil.getRandomPassword(6)
         }
 
         const signUpResponseBody = await authService.signUp(signUpRequestBody);

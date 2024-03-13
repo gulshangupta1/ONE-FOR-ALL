@@ -8,7 +8,6 @@ import { LoginRequestBody } from "../models/request/auth/login.request";
 import { LoginResponseBody } from "../models/response/auth/login.response";
 
 let authService: AuthService;
-let randomUtil: RandomUtil;
 let signUpRequestBody: SignUpRequestBody;
 let signUpResponseBody: SignUpResponseBody;
 
@@ -17,14 +16,13 @@ describe("Get products", () => {
     before(async () => {
         LoggerHelper.setupLogger(specName);
         authService = new AuthService();
-        randomUtil = new RandomUtil();
     });
 
     beforeEach(async () => {
         // Sign-Up
         signUpRequestBody = {
-            email: randomUtil.getRandomGmail().toLowerCase(),
-            password: randomUtil.getRandomPassword(6)
+            email: RandomUtil.getRandomGmail().toLowerCase(),
+            password: RandomUtil.getRandomPassword(6)
         };
 
         signUpResponseBody = await authService.signUp(signUpRequestBody);
