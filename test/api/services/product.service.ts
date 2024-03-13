@@ -12,11 +12,9 @@ export class ProductService extends BaseService {
             params: { limit, page }
         });
 
-        const getProductsResponseBody: GetProductsResponseBody = {
-            status: response.status,
-            statusText: response.statusText,
-            products: response.data.products
-        }
+        const getProductsResponseBody: GetProductsResponseBody = response.data;
+        getProductsResponseBody.status = response.status;
+        getProductsResponseBody.statusText = response.statusText;
 
         return getProductsResponseBody;
     }
