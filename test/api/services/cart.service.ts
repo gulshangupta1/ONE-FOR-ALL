@@ -1,5 +1,7 @@
 import { LOGGER } from "../../../utils/reporting/LoggerHelper";
 import { CreateCartResponseBody } from "../models/response/cart/createCart.response";
+import { DeleteCartResponseBody } from "../models/response/cart/deleteCart.response";
+import { GetCartResponseBody } from "../models/response/cart/getCart.response";
 import { BaseService } from "./base.service";
 import axios from "axios";
 
@@ -22,5 +24,35 @@ export class CartService extends BaseService {
             LOGGER.error(`Error while creating a cart.\n${err.stack}`);
             throw err;
         }
+    }
+
+    async deleteCart(accessToken: string, cartId: string): Promise<DeleteCartResponseBody> {
+        const url: string = `${this.getBaseUrl()}/api/cart/${cartId}`;
+        const token: string = `Bearer ${accessToken}`;
+
+        const response = await axios.delete(url, {
+            headers: { "Authorization": token }
+        });
+
+        return {
+            ...response.data,
+            status: response.status,
+            statusText: response.statusText
+        } as DeleteCartResponseBody;
+    }
+
+    async getCart(accessToken: string): Promise<GetCartResponseBody> {
+        const url: string = `${this.getBaseUrl()}/api/cart`;
+        const token: string = `Bearer ${accessToken}`;
+
+        const response = await axios.get(url, {
+            headers: { "Authorization": token }
+        });
+
+        const getCartResponseBody: GetCartResponseBody = response.data as GetCartResponseBody;
+        getCartResponseBody.status = response.status;
+        getCartResponseBody.statusText = response.statusText;
+
+        return getCartResponseBody;
     }
 }
