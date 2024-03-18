@@ -36,10 +36,10 @@ describe(specName, () => {
 
         // Create profile
         createProfileRequestBody = {
-            first_name: "James",
-            last_name: "last_name",
-            address: "1st cross, chruch street, London",
-            mobile_number: "1234567890"
+            first_name: RandomUtil.getRandomFirstName(),
+            last_name: RandomUtil.getRandomLastName(),
+            address: RandomUtil.getRandomAddress(),
+            mobile_number: RandomUtil.getRandomMobileNumber()
         };
         createProfileResponseBody = await profileService.createProfile(accessToken, createProfileRequestBody);
     });
@@ -59,7 +59,7 @@ describe(specName, () => {
     it("Should be able to update profile", async () => {
         // Update profile
         const updateProfileRequestBody: CreateProfileRequestBody = {
-            first_name: "Kane"
+            first_name: RandomUtil.getRandomFirstName()
         };
         const fieldsUpdated: string[] = ["first_name"];
 
