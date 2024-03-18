@@ -1,11 +1,12 @@
+import { ResponseUtil } from "../../../utils/api/responseUtil";
 import { RandomUtil } from "../../../utils/common/randomUtil";
 import { LoggerHelper } from "../../../utils/reporting/LoggerHelper";
 import { SignUpRequestBody } from "../models/request/auth/signUp.request";
 import { AddItemRequestBody } from "../models/request/cartItem/addItem.resuest";
 import { SignUpResponseBody } from "../models/response/auth/signUp.response";
 import { CreateCartResponseBody } from "../models/response/cart/createCart.response";
-import { AddItemResponseBody } from "../models/response/cartItem/addItem.response";
-import { UpdateItemResponseBody } from "../models/response/cartItem/updateItem.response";
+import { AddItemResponseBody, addItemResponseSchema } from "../models/response/cartItem/addItem.response";
+import { UpdateItemResponseBody, updateItemResponseSchema } from "../models/response/cartItem/updateItem.response";
 import { GetProductsResponseBody, Product } from "../models/response/product/getProducts.response";
 import { AuthService } from "../services/auth.service";
 import { CartItemService } from "../services/cart.item.service";
@@ -70,6 +71,7 @@ describe(specName, () => {
         expect(addItemResponseBody.product_id).to.be.eq(product.id);
         expect(addItemResponseBody.quantity).to.be.eq(quantity);
         expect(addItemResponseBody.price).to.be.eq(product.price);
+        expect(ResponseUtil.isValidateSchema(addItemResponseBody, addItemResponseSchema), "Invalid schema").to.be.true;
     });
 
     it("Should be able to update cart item", async () => {
@@ -101,5 +103,6 @@ describe(specName, () => {
         expect(updateItemResponseBody.product_id).to.be.eq(product.id);
         expect(updateItemResponseBody.quantity).to.be.eq(quantity);
         expect(updateItemResponseBody.price).to.be.eq(product.price);
+        expect(ResponseUtil.isValidateSchema(updateItemResponseBody, updateItemResponseSchema), "Invalid schema").to.be.true;
     });
 });

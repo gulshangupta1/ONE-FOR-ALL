@@ -7,3 +7,31 @@ export interface AddItemResponseBody extends BaseResponse {
     quantity: number,
     price: number
 }
+
+export const addItemResponseSchema = {
+    "type": "object",
+    "properties": {
+        "cart_item_id": {
+            "type": "string"
+        },
+        "cart_id": {
+            "type": "string"
+        },
+        "product_id": {
+            "type": "string"
+        },
+        "quantity": {
+            "type": "number"
+        },
+        "price": {
+            "type": "number"
+        }
+    },
+    "required": [
+        "cart_item_id",
+        "cart_id",
+        "product_id",
+        "quantity",
+        "price"
+    ]
+}
