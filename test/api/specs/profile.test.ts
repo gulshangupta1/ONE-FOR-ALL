@@ -1,10 +1,11 @@
+import { ResponseUtil } from "../../../utils/api/responseUtil";
 import { RandomUtil } from "../../../utils/common/randomUtil";
 import { LoggerHelper } from "../../../utils/reporting/LoggerHelper";
 import { SignUpRequestBody } from "../models/request/auth/signUp.request";
 import { CreateProfileRequestBody } from "../models/request/profile/createProfile.request";
 import { SignUpResponseBody } from "../models/response/auth/signUp.response";
-import { CreateProfileResponseBody } from "../models/response/profile/createProfile.response";
-import { UpdateProfileResponseBody } from "../models/response/profile/updateProfile.response";
+import { CreateProfileResponseBody, createProfileResponseSchema } from "../models/response/profile/createProfile.response";
+import { UpdateProfileResponseBody, updateProfileResponseSchema } from "../models/response/profile/updateProfile.response";
 import { AuthService } from "../services/auth.service";
 import { ProfileService } from "../services/profile.service";
 import { expect } from "chai";
@@ -54,6 +55,7 @@ describe(specName, () => {
         expect(createProfileResponseBody.address).to.be.eq(createProfileRequestBody.address);
         expect(createProfileResponseBody.mobile_number).to.be.eq(createProfileRequestBody.mobile_number);
         expect(createProfileResponseBody.user_id).to.be.eq(signUpResponseBody.data.user.id);
+        expect(ResponseUtil.isValidateSchema(createProfileResponseBody, createProfileResponseSchema), "Invalid schema").to.be.true;
     });
 
     it("Should be able to update profile", async () => {
@@ -75,5 +77,6 @@ describe(specName, () => {
         expect(updateProfileResponseBody.data.user_id).to.be.equal(signUpResponseBody.data.user.id);
         expect(updateProfileResponseBody.message).to.be.equal("Profile updated successfully");
         expect(updateProfileResponseBody.field_updated.toString()).to.be.equal(fieldsUpdated.toString());
+        expect(ResponseUtil.isValidateSchema(updateProfileResponseBody, updateProfileResponseSchema), "Invalid schema").to.be.true;
     });
 });

@@ -1,8 +1,9 @@
+import { ResponseUtil } from "../../../utils/api/responseUtil";
 import { RandomUtil } from "../../../utils/common/randomUtil";
 import { LoggerHelper } from "../../../utils/reporting/LoggerHelper";
 import { SignUpRequestBody } from "../models/request/auth/signUp.request";
 import { GetProductByIdResponseBody } from "../models/response/product/getProductById.response";
-import { GetProductsResponseBody, Product } from "../models/response/product/getProducts.response";
+import { GetProductsResponseBody, Product, getProductsResponseSchema, productSchema } from "../models/response/product/getProducts.response";
 import { AuthService } from "../services/auth.service";
 import { ProductService } from "../services/product.service";
 import { expect } from "chai";
@@ -36,6 +37,7 @@ describe(specName, () => {
         expect(getProductsResponseBody.status, "Invalid status code").to.be.equal(200);
         expect(getProductsResponseBody.statusText, "Invalid status text").to.be.equal("OK");
         expect(getProductsResponseBody.products.length, "Products length should be 20").to.be.equal(20);
+        expect(ResponseUtil.isValidateSchema(getProductsResponseBody, getProductsResponseSchema), "Invalid schema").to.be.true;
     });
 
     it("Should be able to get product details by id", async () => {
@@ -49,6 +51,7 @@ describe(specName, () => {
         expect(getProductByIdResponseBody.product.id).to.be.equal(product.id);
         expect(getProductByIdResponseBody.product.name).to.be.equal(product.name);
         expect(getProductByIdResponseBody.product.price).to.be.equal(product.price);
+        expect(ResponseUtil.isValidateSchema(getProductByIdResponseBody, productSchema), "Invalid schema").to.be.true;
     });
 
     it("Should be able to get products within limit (limit, page -> query parameter)", async () => {

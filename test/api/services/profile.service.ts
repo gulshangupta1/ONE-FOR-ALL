@@ -42,6 +42,7 @@ export class ProfileService extends BaseService {
             return updateProfileResponseBody;
         } catch (err) {
             LOGGER.error(`Error while updating profile.\n${err.stack}`);
+            throw err;
         }
     }
 }

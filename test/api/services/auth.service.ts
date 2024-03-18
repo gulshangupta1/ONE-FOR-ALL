@@ -5,6 +5,7 @@ import { SignUpResponseBody } from "../models/response/auth/signUp.response";
 import { BaseService } from "./base.service";
 import axios, { AxiosResponse } from "axios";
 
+
 export class AuthService extends BaseService {
     async signUp(body: SignUpRequestBody): Promise<SignUpResponseBody> {
         const url: string = `${this.getBaseUrl()}/api/auth/signup`;

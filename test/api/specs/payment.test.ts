@@ -1,10 +1,11 @@
+import { ResponseUtil } from "../../../utils/api/responseUtil";
 import { RandomUtil } from "../../../utils/common/randomUtil";
 import { LoggerHelper } from "../../../utils/reporting/LoggerHelper";
 import { SignUpRequestBody } from "../models/request/auth/signUp.request";
 import { AddItemRequestBody } from "../models/request/cartItem/addItem.resuest";
 import { SignUpResponseBody } from "../models/response/auth/signUp.response";
 import { CreateCartResponseBody } from "../models/response/cart/createCart.response";
-import { MakePaymentResponseBody } from "../models/response/payment/makePayment.response";
+import { MakePaymentResponseBody, makePaymentResponseSchema } from "../models/response/payment/makePayment.response";
 import { GetProductsResponseBody, Product } from "../models/response/product/getProducts.response";
 import { AuthService } from "../services/auth.service";
 import { CartItemService } from "../services/cart.item.service";
@@ -64,5 +65,6 @@ describe(specName, () => {
 
         expect(makePaymentResponseBody.message, "payment success message should be displayed").to.be.eq("payment success");
         expect(makePaymentResponseBody.amount_paid, "Invalid total amount").to.be.eq(product.price * quantity);
+        expect(ResponseUtil.isValidateSchema(makePaymentResponseBody, makePaymentResponseSchema), "Invalid schema").to.be.true;
     });
 });
