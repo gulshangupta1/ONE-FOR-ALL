@@ -8,4 +8,20 @@ export class RandomUtil {
     static getRandomPassword(length?: number): string {
         return faker.internet.password({ length: length });
     }
+
+    static getRandomFirstName(): string {
+        return faker.person.firstName();
+    }
+
+    static getRandomLastName(): string {
+        return faker.person.lastName();
+    }
+
+    static getRandomAddress(): string {
+        return faker.location.streetAddress();
+    }
+
+    static getRandomMobileNumber(): string {
+        return faker.phone.number().replaceAll(/\D/g, "").slice(-10);
+    }
 }

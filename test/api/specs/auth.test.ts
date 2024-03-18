@@ -11,8 +11,8 @@ let authService: AuthService;
 let signUpRequestBody: SignUpRequestBody;
 let signUpResponseBody: SignUpResponseBody;
 
-const specName: string = "Get products";
-describe("Get products", () => {
+const specName: string = "Login/SignUp";
+describe(specName, () => {
     before(async () => {
         LoggerHelper.setupLogger(specName);
         authService = new AuthService();

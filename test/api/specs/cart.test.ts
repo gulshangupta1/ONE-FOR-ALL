@@ -38,14 +38,16 @@ describe(specName, () => {
         expect(createCartResponseBody.status).to.be.equal(201);
         expect(createCartResponseBody.statusText).to.be.eq("Created");
         expect(createCartResponseBody.cart_id).to.not.be.undefined;
-        expect(createCartResponseBody.user_id).to.be.eq(signUpResponseBody.data.user.identities[0].user_id);
+        expect(createCartResponseBody.user_id).to.be.eq
+            (signUpResponseBody.data.user.identities[0].user_id);
         expect(createCartResponseBody.created_at).to.not.be.undefined;
     });
 
     it("Should be able to delete the cart", async () => {
         const cartId: string = createCartResponseBody.cart_id;
 
-        const deleteCartResponseBody: DeleteCartResponseBody = await cartService.deleteCart(accessToken, cartId);
+        const deleteCartResponseBody: DeleteCartResponseBody =
+            await cartService.deleteCart(accessToken, cartId);
 
         expect(deleteCartResponseBody.status).to.be.eq(200);
         expect(deleteCartResponseBody.statusText).to.be.eq("OK");
@@ -56,12 +58,14 @@ describe(specName, () => {
     it("Should be able to get cart", async () => {
         const cartId: string = createCartResponseBody.cart_id;
 
-        const getCartResponseBody: GetCartResponseBody = await cartService.getCart(accessToken);
+        const getCartResponseBody: GetCartResponseBody =
+            await cartService.getCart(accessToken);
 
         expect(getCartResponseBody.status).to.be.eq(200);
         expect(getCartResponseBody.statusText).to.be.eq("OK");
         expect(getCartResponseBody.cart_id).to.be.eq(cartId);
-        expect(getCartResponseBody.user_id).to.be.eq(signUpResponseBody.data.user.identities[0].user_id)
+        expect(getCartResponseBody.user_id).to.be.eq
+            (signUpResponseBody.data.user.identities[0].user_id)
         expect(getCartResponseBody.created_at).to.be.eq(createCartResponseBody.created_at);
     });
 });
