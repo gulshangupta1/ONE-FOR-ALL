@@ -5,7 +5,7 @@ import axios from "axios";
 
 export class PaymentService extends BaseService {
     async makePayment(accessToken: string): Promise<MakePaymentResponseBody> {
-        const url: string = `${this.getBaseUrl()}/api/payment`;
+        const url: string = `${this.getBaseUrl()}/${this.getUrlDetails().payments.makePayment}`;
         const token: string = `Bearer ${accessToken}`;
 
         try {

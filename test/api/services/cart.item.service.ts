@@ -6,7 +6,8 @@ import axios from "axios";
 
 export class CartItemService extends BaseService {
     async addItem(accessToken: string, cartId: string, body: AddItemRequestBody): Promise<AddItemResponseBody> {
-        const url: string = `${this.getBaseUrl()}/api/cart/${cartId}/items`;
+        const url: string = `${this.getBaseUrl()}/${this.getUrlDetails().cartItem.addItemToCart}`
+            .replace("{{CART_ID}}", cartId);
         const token: string = `Bearer ${accessToken}`;
 
         const response = await axios.post(url, body, {
@@ -21,7 +22,9 @@ export class CartItemService extends BaseService {
     }
 
     async updateCartItem(accessToken: string, cartId: string, cartItemId: string, body: AddItemRequestBody): Promise<UpdateItemResponseBody> {
-        const url: string = `${this.getBaseUrl()}/api/cart/${cartId}/items/${cartItemId}`;
+        const url: string = `${this.getBaseUrl()}/${this.getUrlDetails().cartItem.updateCartItem}`
+            .replace("{{CART_ID}}", cartId)
+            .replace("{{CART_ITEM_ID}}", cartItemId);
         const token: string = `Bearer ${accessToken}`;
 
         const response = await axios.put(url, body, {
