@@ -7,7 +7,7 @@ import { UpdateProfileResponseBody } from "../models/response/profile/updateProf
 
 export class ProfileService extends BaseService {
     async createProfile(accessToken: string, body: CreateProfileRequestBody): Promise<CreateProfileResponseBody> {
-        const url: string = `${this.getBaseUrl()}/api/profile`;
+        const url: string = `${this.getBaseUrl()}/${this.getUrlDetails().profile.createProfile}`;
         const token: string = `Bearer ${accessToken}`;
 
         try {
@@ -27,7 +27,7 @@ export class ProfileService extends BaseService {
     }
 
     async updateProfile(accessToken: string, body: CreateProfileRequestBody): Promise<UpdateProfileResponseBody> {
-        const url: string = `${this.getBaseUrl()}/api/profile`;
+        const url: string = `${this.getBaseUrl()}/${this.getUrlDetails().profile.updateProfileInfo}`;
         const token: string = `Bearer ${accessToken}`;
 
         try {

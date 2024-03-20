@@ -7,7 +7,7 @@ import axios from "axios";
 
 export class CartService extends BaseService {
     async createCart(accessToken: string): Promise<CreateCartResponseBody> {
-        const url: string = `${this.getBaseUrl()}/api/cart`;
+        const url: string = `${this.getBaseUrl()}/${this.getUrlDetails().cart.createCart}`;
         const token: string = `Bearer ${accessToken}`;
 
         try {
@@ -27,7 +27,7 @@ export class CartService extends BaseService {
     }
 
     async deleteCart(accessToken: string, cartId: string): Promise<DeleteCartResponseBody> {
-        const url: string = `${this.getBaseUrl()}/api/cart/${cartId}`;
+        const url: string = `${this.getBaseUrl()}/${this.getUrlDetails().cart.deleteCart}`.replace("{{CART_ID}}", cartId);
         const token: string = `Bearer ${accessToken}`;
 
         const response = await axios.delete(url, {
@@ -42,7 +42,7 @@ export class CartService extends BaseService {
     }
 
     async getCart(accessToken: string): Promise<GetCartResponseBody> {
-        const url: string = `${this.getBaseUrl()}/api/cart`;
+        const url: string = `${this.getBaseUrl()}/${this.getUrlDetails().cart.getCart}`;
         const token: string = `Bearer ${accessToken}`;
 
         const response = await axios.get(url, {

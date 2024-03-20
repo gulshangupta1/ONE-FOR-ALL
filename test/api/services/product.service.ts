@@ -6,14 +6,12 @@ import axios, { AxiosResponse } from "axios";
 
 export class ProductService extends BaseService {
     async getProducts(accessToken: string, limit?: number, page?: number): Promise<GetProductsResponseBody> {
-        const url: string = `${this.getBaseUrl()}/api/products`;
-        const token: string = `Bearer ${accessToken}`;
+        const url: string = `${this.getBaseUrl()}/${this.getUrlDetails().product.getProducts}`;
+        this.axiosRequestConfig.headers = { "Authorization": `Bearer ${accessToken}` };
+        this.axiosRequestConfig.params = { limit, page };
 
         try {
-            const response: AxiosResponse<any, any> = await axios.get(url, {
-                headers: { "Authorization": token },
-                params: { limit, page }
-            });
+            const response: AxiosResponse<any, any> = await axios.get(url, this.axiosRequestConfig);
 
             const getProductsResponseBody: GetProductsResponseBody = {
                 status: response.status,
@@ -29,7 +27,8 @@ export class ProductService extends BaseService {
     }
 
     async getProductById(accessToken: string, productId: string): Promise<GetProductByIdResponseBody> {
-        const url: string = `${this.getBaseUrl()}/api/products/${productId}`;
+        const url: string = `${this.getBaseUrl()}/${this.getUrlDetails().product.getProductById}`
+            .replace("{{PRODUCT_ID}}", productId);
         const token: string = `Bearer ${accessToken}`;
 
         try {

@@ -1,0 +1,27 @@
+{
+    "baseUrl": "https://www.apicademy.dev",
+    "auth": {
+        "signUp": "api/auth/signup",
+        "login": "api/auth/login"
+    },
+    "cart": {
+        "createCart": "api/cart",
+        "deleteCart": "api/cart/{{CART_ID}}",
+        "getCart": "api/cart"
+    },
+    "cartItem": {
+        "addItemToCart": "api/cart/{{CART_ID}}/items",
+        "updateCartItem": "api/cart/{{CART_ID}}/items/{{CART_ITEM_ID}}"
+    },
+    "product": {
+        "getProducts": "api/products",
+        "getProductById": "api/products/{{PRODUCT_ID}}"
+    },
+    "profile": {
+        "createProfile": "api/profile",
+        "updateProfileInfo": "api/profile"
+    },
+    "payments": {
+        "makePayment": "api/payment"
+    }
+}

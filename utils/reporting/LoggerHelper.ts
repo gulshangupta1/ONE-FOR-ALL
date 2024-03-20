@@ -45,10 +45,10 @@ export namespace LoggerHelper {
                     }),
                 ],
             });
-            LOGGER.info('-----------------------------');
-            LOGGER.info('LOGGER setup complete');
-            LOGGER.info('-----------------------------');
-            LOGGER.info(`generating log file at ${reportFolderPath}/${loggerFileName}`);
+            // LOGGER.info('-----------------------------');
+            // LOGGER.info('LOGGER setup complete');
+            // LOGGER.info('-----------------------------');
+            // LOGGER.info(`generating log file at ${reportFolderPath}/${loggerFileName}`);
         } catch (error) {
             console.info('-----------------------------');
             console.info('LOGGER setup Failed');
