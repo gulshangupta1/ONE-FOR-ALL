@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "wdio": "wdio run ./wdio.conf.ts",
-    "api": "mocha ./test/api/specs/**/*.ts --timeout=20000 --require=ts-node/register",
-    "api-allure": "mocha ./test/api/specs/**/*.ts --timeout=20000 --require=ts-node/register --reporter=mocha-allure-reporter"
+    "web-local": "wdio run ./config/wdio.chromebrowser.config.ts --spec",
+    "api-local": "mocha ./test/api/specs/**/*.ts --timeout=20000 --require=ts-node/register",
+    "api-allure-local": "mocha ./test/api/specs/**/*.ts --timeout=20000 --require=ts-node/register --reporter=mocha-allure-reporter"
   },
   "keywords": [],
   "author": "Gulshan",
