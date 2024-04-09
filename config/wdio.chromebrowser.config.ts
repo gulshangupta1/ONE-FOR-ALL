@@ -13,7 +13,7 @@ export const config: Options.Testrunner = {
     specs: [`${process.cwd()}/test/web/specs/**/*.ts`],
     exclude: [],
     maxInstances: 1,
-    baseUrl: 'https://opensource-demo.orangehrmlive.com/',
+    baseUrl: 'https://bookcart.azurewebsites.net/',
     capabilities: [{
         browserName: 'chrome'
     }],

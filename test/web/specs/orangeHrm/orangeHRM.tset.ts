@@ -1,14 +1,14 @@
-import { LoggerHelper } from "../../../utils/reporting/LoggerHelper";
-import { DashboardPage } from "../pages/dashboardPage";
-import { LoginPage } from "../pages/loginPage";
-import { LoginUser } from "../resources/customTypes/loginUser";
-import * as loginUserJson from "./../resources/testdata/loginUser.json";
+import { LoggerHelper } from "../../../../utils/reporting/LoggerHelper";
+import { DashboardPage } from "../../pages/orangeHrm/dashboardPage";
+import { LoginPage } from "../../pages/orangeHrm/loginPage";
+import { LoginUser } from "../../resources/customTypes/orangeHrm/loginUser";
+import * as loginUserJson from "../../resources/testdata/loginUser.json";
 
 let loginPage: LoginPage;
 let dashboardPage: DashboardPage;
 
 const specName: string = "Sample tests";
-describe(specName, () => {
+describe.skip(specName, () => {
     before(() => {
         LoggerHelper.setupLogger(specName);
         loginPage = new LoginPage();
