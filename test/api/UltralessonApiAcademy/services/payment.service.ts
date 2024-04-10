@@ -1,4 +1,4 @@
-import { LOGGER } from "../../../utils/reporting/LoggerHelper";
+import { LOGGER } from "../../../../utils/reporting/LoggerHelper";
 import { MakePaymentResponseBody } from "../models/response/payment/makePayment.response";
 import { BaseService } from "./base.service";
 import axios from "axios";

@@ -2,7 +2,7 @@ import axios from "axios";
 import { CreateProfileRequestBody } from "../models/request/profile/createProfile.request";
 import { CreateProfileResponseBody } from "../models/response/profile/createProfile.response";
 import { BaseService } from "./base.service";
-import { LOGGER } from "../../../utils/reporting/LoggerHelper";
+import { LOGGER } from "../../../../utils/reporting/LoggerHelper";
 import { UpdateProfileResponseBody } from "../models/response/profile/updateProfile.response";
 
 export class ProfileService extends BaseService {

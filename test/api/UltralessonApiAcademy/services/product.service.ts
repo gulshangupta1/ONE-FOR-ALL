@@ -1,4 +1,4 @@
-import { LOGGER } from "../../../utils/reporting/LoggerHelper";
+import { LOGGER } from "../../../../utils/reporting/LoggerHelper";
 import { GetProductByIdResponseBody } from "../models/response/product/getProductById.response";
 import { GetProductsResponseBody } from "../models/response/product/getProducts.response";
 import { BaseService } from "./base.service";

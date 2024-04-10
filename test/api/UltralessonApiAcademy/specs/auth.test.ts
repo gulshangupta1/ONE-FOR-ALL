@@ -1,12 +1,12 @@
-import { LoggerHelper } from "../../../utils/reporting/LoggerHelper";
+import { LoggerHelper } from "../../../../utils/reporting/LoggerHelper";
 import { expect } from "chai";
 import { SignUpRequestBody } from "../models/request/auth/signUp.request";
 import { AuthService } from "../services/auth.service";
 import { SignUpResponseBody, signUpResponseSchema } from "../models/response/auth/signUp.response";
-import { RandomUtil } from "../../../utils/common/randomUtil";
+import { RandomUtil } from "../../../../utils/common/randomUtil";
 import { LoginRequestBody } from "../models/request/auth/login.request";
 import { LoginResponseBody, loginResponseSchema } from "../models/response/auth/login.response";
-import { ResponseUtil } from "../../../utils/api/responseUtil";
+import { ResponseUtil } from "../../../../utils/api/responseUtil";
 
 let authService: AuthService;
 let signUpRequestBody: SignUpRequestBody;

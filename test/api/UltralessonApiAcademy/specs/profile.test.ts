@@ -1,6 +1,6 @@
-import { ResponseUtil } from "../../../utils/api/responseUtil";
-import { RandomUtil } from "../../../utils/common/randomUtil";
-import { LoggerHelper } from "../../../utils/reporting/LoggerHelper";
+import { ResponseUtil } from "../../../../utils/api/responseUtil";
+import { RandomUtil } from "../../../../utils/common/randomUtil";
+import { LoggerHelper } from "../../../../utils/reporting/LoggerHelper";
 import { SignUpRequestBody } from "../models/request/auth/signUp.request";
 import { CreateProfileRequestBody } from "../models/request/profile/createProfile.request";
 import { SignUpResponseBody } from "../models/response/auth/signUp.response";

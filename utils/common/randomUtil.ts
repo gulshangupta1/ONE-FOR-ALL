@@ -5,8 +5,8 @@ export class RandomUtil {
         return faker.internet.email({ provider: "gmail" });
     }
 
-    static getRandomPassword(length?: number): string {
-        return faker.internet.password({ length: length });
+    static getRandomPassword(length?: number, pattern?: RegExp): string {
+        return faker.internet.password({ length: length, pattern: pattern });
     }
 
     static getRandomFirstName(): string {
@@ -23,5 +23,9 @@ export class RandomUtil {
 
     static getRandomMobileNumber(): string {
         return faker.phone.number().replaceAll(/\D/g, "").slice(-10);
+    }
+
+    static getRandomUserName(): string {
+        return faker.internet.userName();
     }
 }

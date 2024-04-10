@@ -6,14 +6,30 @@ export class LoginPage extends BasePage {
     }
 
     private locators = {
-        userNameInputField: "//input[@name='username']",
-        passwordInputField: "//input[@name='password']",
-        submitButton: "//button[@type='submit']"
-    };
+        registerButton: "//span[contains(text(), 'Register')]/parent::button",
+        userNameInputField: "//input[@placeholder='Username']",
+        passwordInputField: "//input[@placeholder='Password']",
+        loginButton: "//form//button//span[text()='Login']",
 
-    async login(username: string, password: string): Promise<void> {
+    }
+
+    async clickRegisterButton(): Promise<void> {
+        await this.click(this.locators.registerButton);
+    }
+
+    async enterUsername(username: string): Promise<void> {
         await this.setValue(this.locators.userNameInputField, username);
+    }
+
+    async enterPassword(password: string): Promise<void> {
         await this.setValue(this.locators.passwordInputField, password);
-        await this.click(this.locators.submitButton);
+    }
+
+    async clickLoginButton(): Promise<void> {
+        await this.click(this.locators.loginButton);
+    }
+
+    async getLoginButtonEle(): Promise<WebdriverIO.Element> {
+        return await $(this.locators.loginButton);
     }
 }
