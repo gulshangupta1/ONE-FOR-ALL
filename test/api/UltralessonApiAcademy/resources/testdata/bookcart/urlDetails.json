@@ -1,0 +1,7 @@
+{
+    "baseUrl": "https://bookcart.azurewebsites.net",
+    "login": "api/Login",
+    "book": {
+        "getAvailableBooks": "api/Book"
+    }
+}

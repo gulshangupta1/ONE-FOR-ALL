@@ -13,7 +13,8 @@ export class LoginUtil extends BasePage {
     }
 
     async login(username: string, password: string): Promise<void> {
-        if (!await this.isDisplayed(await this.loginPage.getLoginButtonEle()))
+        const isLoginButtonDisplayed: boolean = await this.isDisplayed(await this.loginPage.getLoginButtonEle());
+        if (!isLoginButtonDisplayed)
             await this.homePage.clickLoginButton();
 
         await this.loginPage.enterUsername(username);
