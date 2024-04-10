@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "wdio": "wdio run ./wdio.conf.ts",
-    "web-local": "wdio run ./config/wdio.chromebrowser.config.ts --spec test/web/specs/bookcart",
+    "web-local": "wdio run ./config/wdio.chromebrowser.config.ts --spec test/web/specs",
     "api-local": "mocha ./test/api/specs/bookcart/login.test.ts --timeout=20000 --require=ts-node/register",
     "api-allure-local": "mocha ./test/api/specs/**/*.ts --timeout=20000 --require=ts-node/register --reporter=mocha-allure-reporter"
   },

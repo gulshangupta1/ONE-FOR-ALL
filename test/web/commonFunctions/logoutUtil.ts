@@ -1,5 +1,5 @@
-import { BasePage } from "../../pages/base/basePage";
-import { HomePage } from "../../pages/bookcart/homePage";
+import { BasePage } from "../pages/base/basePage";
+import { HomePage } from "../pages/homePage";
 
 export class LogoutUtil extends BasePage {
     private homePage: HomePage;

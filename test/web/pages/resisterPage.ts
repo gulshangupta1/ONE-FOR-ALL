@@ -1,6 +1,6 @@
-import { XpathUtil } from "../../../../utils/common/XpathUtil";
-import { RegisterUserData } from "../../resources/customTypes/bookcart/registerData";
-import { BasePage } from "../base/basePage";
+import { XpathUtil } from "../../../utils/common/XpathUtil";
+import { RegisterUserData } from "../resources/customTypes/registerData";
+import { BasePage } from "./base/basePage";
 
 export class RegisterPage extends BasePage {
     constructor() {

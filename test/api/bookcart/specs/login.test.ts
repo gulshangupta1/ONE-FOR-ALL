@@ -2,7 +2,7 @@ import { LoggerHelper } from "../../../../utils/reporting/LoggerHelper";
 import { LoginRequestBody } from "./../models/request/login.request";
 import { LoginResponseBody } from "../models/response/login.response";
 import { LoginService } from "../services/login.service";
-import * as loginDetailsJson from "../../../web/resources/testdata/bookcart/loginDetails.json";
+import * as loginDetailsJson from "../../../web/resources/testdata/loginDetails.json";
 import { expect } from "chai";
 
 let loginService: LoginService;

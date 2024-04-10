@@ -1,5 +1,5 @@
-import { XpathUtil } from "../../../../utils/common/XpathUtil";
-import { BasePage } from "../base/basePage";
+import { XpathUtil } from "../../../utils/common/XpathUtil";
+import { BasePage } from "./base/basePage";
 
 export class HomePage extends BasePage {
     constructor() {

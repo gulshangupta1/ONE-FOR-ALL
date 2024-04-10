@@ -1,14 +1,12 @@
-import { RandomUtil } from "../../../../utils/common/randomUtil";
-import { LoggerHelper } from "../../../../utils/reporting/LoggerHelper";
-import { LoginDetails } from "./../../resources/customTypes/bookcart/loginDetails";
-import { HomePage } from "../../pages/bookcart/homePage";
-import { LoginPage } from "../../pages/bookcart/loginPage";
-import { RegisterPage } from "../../pages/bookcart/resisterPage";
-import { Gender } from "../../resources/customTypes/bookcart/bookcartEnumns";
-import { RegisterUserData } from "../../resources/customTypes/bookcart/registerData";
-import * as loginDetailsJson from "./../../resources/testdata/bookcart/loginDetails.json";
-import { LoginUtil } from "../../commonFunctions/bookcart/loginUtil";
-import { LogoutUtil } from "../../commonFunctions/bookcart/logoutUtil";
+import { RandomUtil } from "../../../utils/common/randomUtil";
+import { LoggerHelper } from "../../../utils/reporting/LoggerHelper";
+import { HomePage } from "../pages/homePage";
+import { LoginPage } from "../pages/loginPage";
+import { RegisterPage } from "../pages/resisterPage";
+import { Gender } from "../resources/customTypes/bookcartEnumns";
+import { RegisterUserData } from "../resources/customTypes/registerData";
+import { LoginUtil } from "../commonFunctions/loginUtil";
+import { LogoutUtil } from "../commonFunctions/logoutUtil";
 
 let homePage: HomePage;
 let loginPage: LoginPage;
@@ -41,13 +39,6 @@ describe(specName, () => {
         await registerPage.enterUserDetails(user);
 
         await loginPageUtil.login(user.userName, user.password);
-        await logoutUtil.logout();
-    });
-
-    it("Registered user should be able to login", async () => {
-        const user: LoginDetails = loginDetailsJson as LoginDetails;
-
-        await loginPageUtil.login(user.username, user.password);
         await logoutUtil.logout();
     });
 });

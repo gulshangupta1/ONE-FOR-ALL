@@ -1,6 +1,6 @@
-import { BasePage } from "../../pages/base/basePage";
-import { HomePage } from "../../pages/bookcart/homePage";
-import { LoginPage } from "../../pages/bookcart/loginPage";
+import { BasePage } from "../pages/base/basePage";
+import { HomePage } from "../pages/homePage";
+import { LoginPage } from "../pages/loginPage";
 
 export class LoginUtil extends BasePage {
     private homePage: HomePage;
