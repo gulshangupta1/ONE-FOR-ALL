@@ -16,11 +16,11 @@ export class BaseService {
         this.baseUrl = this.urlDetails.baseUrl;
     }
 
-    getBaseUrl(): string {
+    protected getBaseUrl(): string {
         return this.baseUrl;
     }
 
-    getUrlDetails(): UrlDetails {
+    protected getUrlDetails(): UrlDetails {
         return this.urlDetails;
     }
 }
